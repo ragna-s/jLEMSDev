@@ -12,6 +12,7 @@ import org.lemsml.jlems.core.sim.ContentError;
 import org.lemsml.jlems.core.sim.StateTypeVisitor;
 import org.lemsml.jlems.core.type.Component;
 
+@SuppressWarnings("StringConcatenationInsideStringBufferAppend")
 public class StateType implements RuntimeType {
 
 	String cptid;
@@ -201,6 +202,7 @@ public class StateType implements RuntimeType {
     
     
     
+    @Override
     public StateRunnable newStateRunnable() throws ContentError, ConnectionError, RuntimeError {
     	StateInstance si = newInstance();
     	return si;
@@ -208,7 +210,7 @@ public class StateType implements RuntimeType {
     
     
 	public StateInstance newInstance() throws ContentError, ConnectionError, RuntimeError {
-		StateInstance ret = null;
+		StateInstance ret;
 		//
 		if (substitutionBuilder != null) {
 			ret = substitutionBuilder.buildSubstitute(this);
@@ -222,7 +224,7 @@ public class StateType implements RuntimeType {
     private StateInstance ownNewInstance() throws ContentError, ConnectionError, RuntimeError {
 					
     	
-    	E.info("Making new instance " + dimensions);
+    	//E.info("Making new instance " + dimensions);
     	
     	
     	
@@ -1337,6 +1339,7 @@ public class StateType implements RuntimeType {
 		return runtimeRecorders;
 	}
 
+    @Override
 	public String getID() {
 		return cptid;
 	}
